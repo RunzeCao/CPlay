@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * Created by 润泽 on 2017/5/3.
- * Base
+ * BaseActivity
  */
 
 public class BaseActivity extends AppCompatActivity {
