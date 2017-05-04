@@ -1,6 +1,7 @@
 package com.example.cplay.fragment;
 
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.cplay.view.LoadingPage;
 
@@ -17,6 +18,8 @@ public class AppFragment extends BaseFragment {
 
     @Override
     protected View createSuccessView() {
-        return null;
+        TextView view=new TextView(getActivity());
+        view.setText("AppFragment");
+        return view;
     }
 }

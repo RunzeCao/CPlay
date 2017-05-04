@@ -1,6 +1,7 @@
 package com.example.cplay.view;
 
 import android.content.Context;
+import android.os.SystemClock;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -132,6 +133,24 @@ public abstract class LoadingPage extends FrameLayout {
         if (state == STATE_ERROR || state == STATE_EMPTY) {
             state = STATE_LOADING;
         }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SystemClock.sleep(2000);
+                final LoadResult result = load();
+                UiUtils.runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        if (result != null) {
+                            state = result.getValue();
+                            showPage(); // 状态改变了,重新判断当前应该显示哪个界面
+                        }
+                    }
+                });
+            }
+        }).start();
+        showPage();
     }
 
 
