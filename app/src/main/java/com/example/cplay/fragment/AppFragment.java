@@ -13,7 +13,7 @@ import com.example.cplay.view.LoadingPage;
 public class AppFragment extends BaseFragment {
     @Override
     protected LoadingPage.LoadResult load() {
-        return LoadingPage.LoadResult.empty;
+        return LoadingPage.LoadResult.error;
     }
 
     @Override

@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.cplay.fragment.FragmentFactory;
+import com.orhanobut.logger.Logger;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -26,6 +27,7 @@ public class MainActivity extends BaseActivity
     protected void init() {
         super.init();
         tabNames = getResources().getStringArray(R.array.tab_names);
+        Logger.d(tabNames);
     }
 
     @Override

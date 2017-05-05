@@ -129,27 +129,25 @@ public abstract class LoadingPage extends FrameLayout {
      * 根据服务器的数据 切换状态
      */
     public void show() {
-        // TODO: 2017/5/4 根据服务器返回判断显示界面
         if (state == STATE_ERROR || state == STATE_EMPTY) {
             state = STATE_LOADING;
         }
-        new Thread(new Runnable() {
+        new Thread() {
             @Override
             public void run() {
                 SystemClock.sleep(2000);
                 final LoadResult result = load();
                 UiUtils.runOnUiThread(new Runnable() {
-
                     @Override
                     public void run() {
                         if (result != null) {
                             state = result.getValue();
-                            showPage(); // 状态改变了,重新判断当前应该显示哪个界面
+                            showPage();
                         }
                     }
                 });
             }
-        }).start();
+        }.start();
         showPage();
     }
 
