@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.cplay.fragment.BaseFragment;
 import com.example.cplay.fragment.FragmentFactory;
 import com.orhanobut.logger.Logger;
 
@@ -59,6 +60,14 @@ public class MainActivity extends BaseActivity
         PagerTabStrip pagerTabStrip = (PagerTabStrip) findViewById(R.id.main_pts);
         pagerTabStrip.setTabIndicatorColor(getResources().getColor(R.color.indicatorColor));
         viewPager.setAdapter(new MainAdapter(getSupportFragmentManager()));
+        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                BaseFragment createFragment = FragmentFactory.createFragment(position);
+                createFragment.show();//  当切换界面的时候 重
+            }
+        });
     }
 
     @Override
@@ -139,10 +148,6 @@ public class MainActivity extends BaseActivity
             return tabNames.length;
         }
 
-        @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return false;
-        }
 
         @Override
         public CharSequence getPageTitle(int position) {

@@ -37,9 +37,16 @@ public abstract class BaseFragment extends Fragment {
         }
         return loadingPage;
     }
-
+    /**
+     * 请求服务器
+     * @return LoadResult
+     */
     protected abstract LoadingPage.LoadResult load();
 
+    /**
+     * 创建成功的界面
+     * @return view
+     */
     protected abstract View createSuccessView();
 
 
