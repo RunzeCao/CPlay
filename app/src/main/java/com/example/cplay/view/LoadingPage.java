@@ -12,7 +12,9 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.example.cplay.R;
+import com.example.cplay.manager.ThreadManager;
 import com.example.cplay.utils.UiUtils;
+import com.orhanobut.logger.Logger;
 
 /**
  * Created by CRZ on 2017/5/4 10:12.
@@ -48,6 +50,7 @@ public abstract class LoadingPage extends FrameLayout {
     }
 
     private void init() {
+
         loadingView = createLoadingView();// 创建了加载中的界面
         if (loadingView != null) {
             this.addView(loadingView, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -131,11 +134,12 @@ public abstract class LoadingPage extends FrameLayout {
         if (state == STATE_ERROR || state == STATE_EMPTY) {
             state = STATE_LOADING;
         }
-        new Thread() {
+        ThreadManager.getIstance().createLoadingPool().execute(new Runnable() {
             @Override
             public void run() {
                 SystemClock.sleep(2000);
                 final LoadResult result = load();
+                Logger.i(Thread.currentThread().getName());
                 UiUtils.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -146,7 +150,24 @@ public abstract class LoadingPage extends FrameLayout {
                     }
                 });
             }
-        }.start();
+        });
+/*        new Thread() {
+            @Override
+            public void run() {
+                SystemClock.sleep(2000);
+                final LoadResult result = load();
+                Logger.i(Thread.currentThread().getName());
+                UiUtils.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (result != null) {
+                            state = result.getValue();
+                            showPage();
+                        }
+                    }
+                });
+            }
+        }.start();*/
         showPage();
     }
 

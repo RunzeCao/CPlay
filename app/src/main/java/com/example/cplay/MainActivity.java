@@ -18,7 +18,6 @@ import android.view.View;
 
 import com.example.cplay.fragment.BaseFragment;
 import com.example.cplay.fragment.FragmentFactory;
-import com.orhanobut.logger.Logger;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -28,7 +27,6 @@ public class MainActivity extends BaseActivity
     protected void init() {
         super.init();
         tabNames = getResources().getStringArray(R.array.tab_names);
-        Logger.d(tabNames);
     }
 
     @Override
@@ -65,7 +63,7 @@ public class MainActivity extends BaseActivity
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
                 BaseFragment createFragment = FragmentFactory.createFragment(position);
-                createFragment.show();//  当切换界面的时候 重
+                createFragment.show();//  当切换界面的时候 重新加在界面
             }
         });
     }
