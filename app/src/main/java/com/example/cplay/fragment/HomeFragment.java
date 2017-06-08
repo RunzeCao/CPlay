@@ -4,7 +4,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.cplay.domain.AppInfo;
 import com.example.cplay.view.LoadingPage;
+
+import java.util.List;
 
 /**
  * Created by CRZ on 2017/5/4 11:30.
@@ -12,6 +15,7 @@ import com.example.cplay.view.LoadingPage;
  */
 
 public class HomeFragment extends BaseFragment {
+    private List<AppInfo> datas;
 
     // 当Fragment挂载的activity创建的时候调用
     @Override
