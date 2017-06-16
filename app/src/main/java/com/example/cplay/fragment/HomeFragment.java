@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.cplay.domain.AppInfo;
+import com.example.cplay.protocol.HomeProtocol;
 import com.example.cplay.view.LoadingPage;
 
 import java.util.List;
@@ -26,13 +27,15 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected LoadingPage.LoadResult load() {
-        return LoadingPage.LoadResult.success;
+        HomeProtocol protocol = new HomeProtocol();
+        datas = protocol.load(0);
+        return checkData(datas);
     }
 
     @Override
     protected View createSuccessView() {
         TextView view=new TextView(getActivity());
-        view.setText("HomeFragment");
+        view.setText(datas.toString());
         return view;
     }
 }
